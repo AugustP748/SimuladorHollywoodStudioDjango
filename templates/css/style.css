@@ -1,0 +1,42 @@
+:root{
+    --lightgray: #f2f1f7;
+    --darkgray: #1c1c1e;
+    --borderlightmode: 2px solid black;
+}
+
+.navbar{
+    border-bottom: var(--borderlightmode);
+}
+
+body{
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+main{
+    background-color: var(--lightgray);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+section{
+    border: var(--borderlightmode);
+    border-radius: 20px;
+    background-color: white;
+    
+}
+
+.section-table{
+    height: 90vh;
+    overflow-y: auto;
+}
+
+.section-function{
+    height: 100%;
+}
+
+footer{
+   border-top: var(--borderlightmode);
+}
