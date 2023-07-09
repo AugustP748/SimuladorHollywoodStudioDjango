@@ -1,4 +1,5 @@
 from GeneradorService import *
+import pandas as pd
 import copy
 import math
 
@@ -53,9 +54,21 @@ if __name__ == '__main__':
         tem+=ted
         ted=0
     #print(tem/cvd) # promedio tiempo de espera mensual   
-      
+    
+    df = pd.DataFrame(tiempo_de_espera_mes)
+    #print(df.loc[0:4, [1,3,6]])
+    print(df)
+    print()
+    print(df.describe())
+    print()
+    print(df.describe().loc['mean']) #tiempos de espera promedio de cada día
+    print()
+    print(df.describe().loc['mean'].mean()) #tiempo de espera promedio en el mes
+    
+    
+    
 
     #print(tiempo_de_espera_mes)
-    for valor_externo in tiempo_de_espera_mes.values():
-            print(valor_externo)
+    #for valor_externo in tiempo_de_espera_mes.values():
+    #        print(valor_externo)
         
