@@ -1,30 +1,32 @@
-import simpy
-import random
+import pandas as pd
 
-class SistemaColas:
-    def __init__(self, env):
-        self.env = env
-        self.servidor = simpy.Resource(env, capacity=1)
-        self.tiempo_total_espera = 0
-        self.clientes_atendidos = 0
+te_table = [(1, 1, 456, {"RR": 45.6, "MF": 78.9}),
+            (1, 2, 785, {"RR": 57.8, "MF": 33.7}),
+            (1, 3, 234, {"RR": 22.1, "MF": 71.4}),
+            (2, 1, 984, {"RR": 98.3, "MF": 83.2}),
+            (2, 2, 478, {"RR": 67.8, "MF": 34.7}),
+            (2, 3, 593, {"RR": 41.1, "MF": 56.9})]
 
-    def llegada_cliente(self):
-        with self.servidor.request() as req:
-            yield req
+# Convertir la lista en un DataFrame
+df = pd.DataFrame(te_table)
 
-            tiempo_espera = random.expovariate(1.0 / 2)  # Distribución exponencial con tasa 2
-            yield self.env.timeout(tiempo_espera)
-            self.tiempo_total_espera += tiempo_espera
-            self.clientes_atendidos += 1
+# Renombrar las columnas
+df = df.rename(columns={0: "día", 1: "hora", 3: "atracciones", 2: "visitantes"})
 
-def ejecutar_simulacion():
-    env = simpy.Environment()
-    sistema = SistemaColas(env)
-    env.process(sistema.llegada_cliente())
+# Establecer el índice
+df = df.set_index(["día", "hora", "visitantes"])
 
-    env.run(until=10)  # Tiempo de simulación
+# Imprimir el DataFrame resultante
+print(df)
 
-    tiempo_promedio_espera = sistema.tiempo_total_espera / sistema.clientes_atendidos
-    print("Tiempo promedio de espera:", tiempo_promedio_espera)
+# Calcular la suma del contenido de cada diccionario dividido por "visitantes"
+resultado = df.apply(lambda row: sum(row["atracciones"].values()) / row.name[2], axis=1)
 
-ejecutar_simulacion()
+# Renombrar la columna del resultado
+resultado = resultado.rename("resultado")
+
+# Agregar la columna al DataFrame principal
+df["resultado"] = resultado
+
+# Imprimir el DataFrame resultante
+print(df)

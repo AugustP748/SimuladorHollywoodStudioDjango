@@ -12,20 +12,21 @@ if __name__ == '__main__':
     ted: float = 0
     tem: float = 0
     cvd: float = 0
-    tiempo_de_espera_mes: dict = dict()
-    te_promedio_hora:dict = dict()
+    tuple: tuple = ()
+    atractions:dict = dict()
+    general_table:list=[]
     generate = Generadores()
     new_u_value: float = generate.congruencial_multiplicativo(1317, 5631, 547)
     # for de dias
     for d in range(30):
         #for de horas
         for h in range(8):
-            
+            tuple+=(d+1,)
+            tuple+=(h+1,)
             u: float = next(new_u_value)
             cvh: int = math.trunc(227*(227-226)*u) #cantidad de visitantes en la hora x
             cvd+=cvh #cantidad de visitantes diarios = suma de cant. visit. en las 8hs del día
-            #print(cvh)
-            
+            tuple+=(cvh,)
             for _ in range(cvh):
                 """for de visitantes"""
                 u = next(new_u_value)
@@ -40,30 +41,40 @@ if __name__ == '__main__':
                     u = next(new_u_value)
                     teminmf=-85*math.log10(u) #TE en minutos en atraccion MF
                     tevmf+=teminmf #TE total de visitantes en atracción MF
-                
-            teh = teh + tevrr + tevmf #tiempo de espera total en la hora
-            ted+=teh # tiempo de espera del dia es suma de TE total por cada hora
+            atractions["RR"] = float("{:.2f}".format(tevrr/vrr))
+            atractions["MF"] = float("{:.2f}".format(tevmf/vmf))
+            
+            tuple+=(copy.copy(atractions),)
             #print(teh/cvh) # promedio tiempo de espera de la hora
-            te_promedio_hora[h+1] = float("{:.3f}".format(teh/cvh))
-            teh=0 # reiniciamos TE de la hora para la siguiente hora
+            vrr=0
+            vmf=0
             tevmf=0
             tevrr=0
+            general_table.append(copy.copy(tuple))
+            tuple=()
+            atractions.clear()
             
-        tiempo_de_espera_mes[d+1] = copy.copy(te_promedio_hora)
-        te_promedio_hora.clear()  
+            #te_table = [(1,1,{"RR":45.6,"MF":78.9}),(1,2,{"RR":57.8,"MF":33.7}),(1,3,{"RR":22.1,"MF":71.4}),(2,1,{"RR":98.3,"MF":83.2}),(2,2,{"RR":67.8,"MF":34.7}),(2,3,{"RR":41.1,"MF":56.9})]
+
+
         tem+=ted
         ted=0
     #print(tem/cvd) # promedio tiempo de espera mensual   
     
-    df = pd.DataFrame(tiempo_de_espera_mes)
+    df = pd.DataFrame(general_table)
     #print(df.loc[0:4, [1,3,6]])
-    print(df)
+    # Renombrar las columnas
+    df = df.rename(columns={0: "día", 1: "hora", 2: "visitantes", 3: "atracciones"})
+
+    # Establecer el índice
+    df = df.set_index(["día", "hora", "visitantes"])
+    print(df.loc[df.index.get_level_values("día") == 30])
     print()
-    print(df.describe())
-    print()
-    print(df.describe().loc['mean']) #tiempos de espera promedio de cada día
-    print()
-    print(df.describe().loc['mean'].mean()) #tiempo de espera promedio en el mes
+    #print(df.describe())
+    #print()
+    #print(df.describe().loc['mean']) #tiempos de espera promedio de cada día
+    #print()
+    #print(df.describe().loc['mean'].mean()) #tiempo de espera promedio en el mes
     
     
     
