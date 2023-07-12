@@ -28,5 +28,8 @@ resultado = resultado.rename("resultado")
 # Agregar la columna al DataFrame principal
 df["resultado"] = resultado
 
+# Calcular la media del contenido de "RR" y "MF" de los diccionarios
+df = df["atracciones"].apply(lambda diccionario: pd.Series(diccionario).mean())
+
 # Imprimir el DataFrame resultante
 print(df)

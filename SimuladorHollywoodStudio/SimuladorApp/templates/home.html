@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="row text-center g-0 h-100">
+      <div class="col h-100">
+        <section class="">
+          <h5>Ingreso esperado</h5>
+          <form>
+              <div class="mb-3">
+                <input type="number"
+                  class="form-control" name="" id="monto" aria-describedby="helpId" placeholder="Monto esperado">
+                <small id="helpId" class="form-text text-muted">Ingrese el monto en Millones de Dólares</small>
+              </div>
+              
+              <a type="submit" class="btn btn-primary w-100 rounded-4">Simular</a>
+          </form>
+        </section>
+
+        <section class="section-function ">
+          <h5>Funci&oacute;n</h5>
+          <figure>
+            
+          </figure>
+        </section>
+
+      </div>
+      <div class="col">
+
+        <section class="section-table overflow-auto">
+          <h5>Tabla de Tiempo de espera</h5>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button class="btn btn-primary">
+                  <i class="fa-solid fa-arrow-left"></i>
+                </button>
+              </div>
+              <input type="text" class="form-control text-center" value="07/07/2023" readonly>
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          
+            <div class="table-responsive-sm">
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">Hora</th>
+                    <th scope="col">RR (min)</th>
+                    <th scope="col">MF (min)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="">
+                    <td scope="row">R1C1</td>
+                    <td>R1C2</td>
+                    <td>R1C3</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Item</td>
+                    <td>Item</td>
+                    <td>Item</td>
+                  </tr> 
+                  
+                </tbody>
+              </table>
+            </div>
+        </section>
+
+      </div>
+
+      <div class="col">
+        <section class="section-state">
+          <h5>Estado de Simulaci&oacute;n</h5>
+          <p class="m-0">En espera...</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum esse, nulla quasi at saepe corporis</p>
+        </section>
+
+        <section class="section-map">
+          <h5>Star Wars Galaxy's Edge</h5>
+          <figure>
+            <img src="images/mapa.png" alt="" class="img-fluid rounded">
+          </figure>
+        </section>
+
+      </div>
+    </div>
+{% endblock %}  

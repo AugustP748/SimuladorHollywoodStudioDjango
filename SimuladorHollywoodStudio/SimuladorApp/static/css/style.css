@@ -1,0 +1,53 @@
+
+
+:root{
+    --lightgray: #f2f1f7;
+    --darkgray: #1c1c1e;
+    --borderlightmode: 2px solid black;
+}
+
+.navbar{
+    border-bottom: var(--borderlightmode);
+}
+
+body{
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+main{
+    background-color: var(--lightgray);
+    
+}
+
+section{
+    border: var(--borderlightmode);
+    border-radius: 20px;
+    background-color: white;
+    margin:4px;
+    padding:10px;
+}
+
+.section-function{
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+    
+}
+
+.section-table{
+    height: 98%;
+}
+
+.section-state{
+    height:30%;
+}
+
+.section-map{
+    height: 67%;
+}
+
+footer{
+    border-top: var(--borderlightmode);
+ }
