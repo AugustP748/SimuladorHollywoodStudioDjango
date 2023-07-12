@@ -68,6 +68,7 @@ if __name__ == '__main__':
 
     # Establecer el índice
     df = df.set_index(["día", "hora", "visitantes"])
+    
     print(df.loc[df.index.get_level_values("día") == 30])
     print()
     #print(df.describe())

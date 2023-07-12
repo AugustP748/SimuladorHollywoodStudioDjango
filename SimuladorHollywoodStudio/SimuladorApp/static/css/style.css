@@ -27,6 +27,11 @@ section{
     background-color: white;
     margin:4px;
     padding:10px;
+    transition: all 0.3s;
+}
+
+section:hover{
+    transform: scale(1.01);
 }
 
 .section-function{
@@ -47,6 +52,8 @@ section{
 .section-map{
     height: 67%;
 }
+
+
 
 footer{
     border-top: var(--borderlightmode);
