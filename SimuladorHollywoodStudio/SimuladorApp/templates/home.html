@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block content %}
+
     <div class="row text-center g-0 h-100">
       <div class="col h-100">
         <section class="">
@@ -13,7 +14,7 @@
                 <small id="helpId" class="form-text text-muted">Ingrese el monto en Millones de Dólares</small>
               </div>
               
-              <button type="submit" class="btn btn-primary w-100 rounded-4">Simular</button>
+              <button id="btnSimular" type="submit" class="btn btn-primary w-100 rounded-4">Simular</button>
           </form>
         </section>
 
@@ -52,8 +53,17 @@
                     <th scope="col">MF (min)</th>
                   </tr>
                 </thead>
-                <tbody>
-                  
+                <tbody id="tablaBody">
+                  {% for indice,row in table_data.iterrows %}
+                    <tr>
+                        <td>{{indice.1}}:00</td>
+                      {% for data in row %}
+                          <td>{{ data.RR }}</td>
+                          <td>{{ data.MF }}</td>
+                      {% endfor %}
+
+                    </tr>
+                  {% endfor %}
                   
                   
                   

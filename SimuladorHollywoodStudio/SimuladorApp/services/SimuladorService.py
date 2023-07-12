@@ -11,7 +11,7 @@ class Simulador:
         self.tevmf: float = 0
         self.teh: float = 0
         self.ted: float = 0
-        self.tuple: tuple = ()
+        self.tuple_item: tuple = ()
         self.atractions:dict = dict()
         self.general_table:list=[]
         self.generate = Generadores()
@@ -23,44 +23,45 @@ class Simulador:
         for d in range(30):
             #for de horas
             for h in range(8):
-                tuple+=(d+1,)
-                tuple+=(h+1,)
+                self.tuple_item+=(d+1,)
+                self.tuple_item+=(h+1,)
                 u: float = next(self.new_u_value)
                 cvh: int = math.trunc(227*(227-226)*u) #cantidad de visitantes en la hora x
-                tuple+=(cvh,)
+                self.tuple_item+=(cvh,)
                 for _ in range(cvh):
                     """for de visitantes"""
                     u = next(self.new_u_value)
                     if u <= 0.65:
-                        vrr+=1 #cantidad de visitantes que visitan atarcción RR en la hora
+                        self.vrr+=1 #cantidad de visitantes que visitan atarcción RR en la hora
                         u = next(self.new_u_value)
                         teminrr=-190*math.log10(u) #TE en minutos en atraccion RR
                         #print(teminrr)
-                        tevrr+=teminrr #TE total de visitantes en atracción RR
+                        self.tevrr+=teminrr #TE total de visitantes en atracción RR
                     else:
-                        vmf+=1 #cantidad de visitantes que visitan atarcción MF en la hora
+                        self.vmf+=1 #cantidad de visitantes que visitan atarcción MF en la hora
                         u = next(self.new_u_value)
                         teminmf=-85*math.log10(u) #TE en minutos en atraccion MF
-                        tevmf+=teminmf #TE total de visitantes en atracción MF
-                self.atractions["RR"] = float("{:.2f}".format(tevrr/vrr))
-                self.atractions["MF"] = float("{:.2f}".format(tevmf/vmf))
+                        self.tevmf+=teminmf #TE total de visitantes en atracción MF
+                self.atractions["RR"] = float("{:.2f}".format(self.tevrr/self.vrr))
+                self.atractions["MF"] = float("{:.2f}".format(self.tevmf/self.vmf))
                 
-                tuple+=(copy.copy(self.atractions),)
+                self.tuple_item+=(copy.copy(self.atractions),)
                 #print(teh/cvh) # promedio tiempo de espera de la hora
-                vrr=0
-                vmf=0
-                tevmf=0
-                tevrr=0
-                self.general_table.append(copy.copy(tuple))
-                tuple=()
+                self.vrr=0
+                self.vmf=0
+                self.tevmf=0
+                self.tevrr=0
+                self.general_table.append(copy.copy(self.tuple_item))
+                self.tuple_item=()
                 self.atractions.clear()
                 
         #print(tem/cvd) # promedio tiempo de espera mensual   
         
         df = pd.DataFrame(self.general_table)
+        #df = pd.DataFrame(self.general_table, columns=['atracciones'])
         df = df.rename(columns={0: "día", 1: "hora", 2: "visitantes", 3: "atracciones"})
         df = df.set_index(["día", "hora", "visitantes"])
         #print(df.loc[df.index.get_level_values("día") == 30])
-        return df
+        return df.loc[df.index.get_level_values("día") == 30]
     
         
