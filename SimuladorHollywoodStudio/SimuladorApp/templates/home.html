@@ -1,18 +1,19 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block content %}
     <div class="row text-center g-0 h-100">
       <div class="col h-100">
         <section class="">
           <h5>Ingreso esperado</h5>
-          <form>
+          <form action="{% url 'Simulador:home' %}" method="post">
+            {% csrf_token %}
               <div class="mb-3">
                 <input type="number"
-                  class="form-control" name="" id="monto" aria-describedby="helpId" placeholder="Monto esperado">
+                  class="form-control" name="monto" id="monto" aria-describedby="helpId" placeholder="Monto esperado">
                 <small id="helpId" class="form-text text-muted">Ingrese el monto en Millones de Dólares</small>
               </div>
               
-              <a type="submit" class="btn btn-primary w-100 rounded-4">Simular</a>
+              <button type="submit" class="btn btn-primary w-100 rounded-4">Simular</button>
           </form>
         </section>
 
@@ -115,7 +116,7 @@
         <section class="section-map">
           <h5>Star Wars Galaxy's Edge</h5>
           <figure>
-            <img src="images/mapa.png" alt="" class="img-fluid rounded">
+            <img src="{% static 'images/mapa.png' %}" alt="" class="img-fluid rounded">
           </figure>
         </section>
 
