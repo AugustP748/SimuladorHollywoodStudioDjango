@@ -30,115 +30,38 @@ def createGraph():
     )
     
     
-    # Coordenadas del punto en el que se dibujarán las líneas
-    punto_x = 200
-    punto_y = 161 * punto_x
+    #GraphPoint(fig)
     
     # Coordenadas del punto en el que se dibujarán las líneas
     punto_x_n1 = 130
     punto_y_n1 = 161 * punto_x_n1
     
-    
+    GraphDotLinesHoriz(fig, punto_x_n1, punto_y_n1)
+    GraphDotLinesVert(fig, punto_x_n1, punto_y_n1)
 
-    # Agrega la línea punteada vertical desde el eje x hasta el punto
-    fig.add_shape(
-        type="line",
-        x0=punto_x_n1,
-        y0=0,
-        x1=punto_x_n1,
-        y1=punto_y_n1,
-        line=dict(
-            color="red",
-            width=1,
-            dash="dot"
-        ),
-        name=''  # Oculta la leyenda para la línea
-    )
 
-    # Agrega la línea punteada horizontal desde el eje y hasta el punto
-    fig.add_shape(
-        type="line",
-        x0=0,
-        y0=punto_y_n1,
-        x1=punto_x_n1,
-        y1=punto_y_n1,
-        line=dict(
-            color="red",
-            width=1,
-            dash="dot"
-        )
-    )
-    
     # Coordenadas del punto en el que se dibujarán las líneas
     punto_x_n2 = 180
     punto_y_n2 = 161 * punto_x_n2
 
-    
-
-    # Agrega la línea punteada vertical desde el eje x hasta el punto
-    fig.add_shape(
-        type="line",
-        x0=punto_x_n2,
-        y0=0,
-        x1=punto_x_n2,
-        y1=punto_y_n2,
-        line=dict(
-            color="red",
-            width=1,
-            dash="dot"
-        ),
-        name=''  # Oculta la leyenda para la línea
-    )
-
-    # Agrega la línea punteada horizontal desde el eje y hasta el punto
-    fig.add_shape(
-        type="line",
-        x0=0,
-        y0=punto_y_n2,
-        x1=punto_x_n2,
-        y1=punto_y_n2,
-        line=dict(
-            color="red",
-            width=1,
-            dash="dot"
-        )
-    )
+    GraphDotLinesHoriz(fig, punto_x_n2, punto_y_n2)
+    GraphDotLinesVert(fig, punto_x_n2, punto_y_n2)
     
     # Coordenadas del punto en el que se dibujarán las líneas
     punto_x_n3 = 360
-    punto_y_n3 = 161 * punto_x_n3
+    punto_y_n3 = 161 * 360
     
+    GraphDotLinesHoriz(fig, punto_x_n3, punto_y_n3)
+    GraphDotLinesVert(fig, punto_x_n3, punto_y_n3)
     
+    return fig.to_html(full_html=False)
 
-    # Agrega la línea punteada vertical desde el eje x hasta el punto
-    fig.add_shape(
-        type="line",
-        x0=punto_x_n3,
-        y0=0,
-        x1=punto_x_n3,
-        y1=punto_y_n3,
-        line=dict(
-            color="red",
-            width=1,
-            dash="dot"
-        ),
-        name=''  # Oculta la leyenda para la línea
-    )
 
-    # Agrega la línea punteada horizontal desde el eje y hasta el punto
-    fig.add_shape(
-        type="line",
-        x0=0,
-        y0=punto_y_n3,
-        x1=punto_x_n3,
-        y1=punto_y_n3,
-        line=dict(
-            color="red",
-            width=1,
-            dash="dot"
-        )
-    )
-    
+def GraphPoint(fig):
+    # Coordenadas del punto
+    punto_x = 200
+    punto_y = 161 * punto_x
+
     # Agrega el punto a la gráfica
     fig.add_trace(
         go.Scatter(
@@ -151,12 +74,39 @@ def createGraph():
             )
         )
     )
-    
-    
-    # Aumenta el tamaño del punto
+
+     # Aumenta el tamaño del punto
     fig.update_traces(
         selector=dict(type='scatter', mode='markers'),
         marker=dict(size=10)
     )
-    
-    return fig.to_html(full_html=False)
+
+def GraphDotLinesHoriz(fig,x,y):
+    # Agrega la línea punteada horizontal desde el eje y hasta el punto
+    fig.add_shape(
+        type="line",
+        x0=0,
+        y0=y,
+        x1=x,
+        y1=y,
+        line=dict(
+            color="red",
+            width=1,
+            dash="dot"
+        )
+    )
+
+def GraphDotLinesVert(fig,x,y):
+    # Agrega la línea punteada horizontal desde el eje y hasta el punto
+    fig.add_shape(
+        type="line",
+        x0=x,
+        y0=0,
+        x1=x,
+        y1=y,
+        line=dict(
+            color="red",
+            width=1,
+            dash="dot"
+        )
+    )

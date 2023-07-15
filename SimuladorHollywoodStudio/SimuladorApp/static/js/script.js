@@ -1,16 +1,16 @@
 
-document.getElementById('btnSimular').addEventListener('click', function() {
-  // Realizar una solicitud AJAX al servidor para obtener los datos
-  fetch('./templates/home.html')
-    .then(response => response.json())
-    .then(data => {
-      // Manipular los datos recibidos
-      // Por ejemplo, puedes actualizar la tabla con los nuevos datos
-      actualizarTabla(data);
-    })
-    .catch(error => {
-      console.error('Error al obtener los datos:', error);
-    });
+const getDataTable = async () => {
+  try{
+    const response = await fetch('./table-data');
+    const data = await response.json();  
+    console.log(data);
+  } catch(e){
+    console.log(e);
+  }
+};
+
+document.getElementById('simular-btn').addEventListener('click', function() {
+   getDataTable();
 });
 
 function actualizarTabla(data) {

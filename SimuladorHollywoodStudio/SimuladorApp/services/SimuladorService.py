@@ -18,7 +18,7 @@ class Simulador:
         self.new_u_value: float = self.generate.congruencial_multiplicativo(1317, 5631, 547)
 
     
-    def simular(self):
+    def simular(self,day):
         # for de dias
         for d in range(30):
             #for de horas
@@ -62,6 +62,6 @@ class Simulador:
         df = df.rename(columns={0: "día", 1: "hora", 2: "visitantes", 3: "atracciones"})
         df = df.set_index(["día", "hora", "visitantes"])
         #print(df.loc[df.index.get_level_values("día") == 30])
-        return df.loc[df.index.get_level_values("día") == 30]
+        return df.loc[df.index.get_level_values("día") == day]
     
         

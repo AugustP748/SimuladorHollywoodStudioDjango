@@ -69,8 +69,16 @@ if __name__ == '__main__':
     # Establecer el índice
     df = df.set_index(["día", "hora", "visitantes"])
     
-    print(df.loc[df.index.get_level_values("día") == 30])
+    #print(df.loc[df.index.get_level_values("día") == 30])
     print()
+
+    # Calcular la media del contenido de "RR" y "MF" de los diccionarios
+    media_rr_mf = df["atracciones"].apply(lambda diccionario: pd.Series(diccionario).mean())
+
+    # Imprimir la media de "RR" y "MF"
+    print(media_rr_mf)
+
+
     #print(df.describe())
     #print()
     #print(df.describe().loc['mean']) #tiempos de espera promedio de cada día

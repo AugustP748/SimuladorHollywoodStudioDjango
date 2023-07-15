@@ -6,15 +6,15 @@
       <div class="col h-100">
         <section class="">
           <h5>Ingreso esperado</h5>
-          <form action="{% url 'Simulador:home' %}" method="post">
-            {% csrf_token %}
+          <form>
+           
               <div class="mb-3">
                 <input type="number" class="form-control" name="monto" id="monto" aria-describedby="helpId" placeholder="Monto esperado" min="0" step="10">
 
                 <small id="helpId" class="form-text text-muted">Ingrese el monto en Millones de Dólares</small>
               </div>
               
-              <button id="btnSimular" type="submit" class="btn btn-primary w-100 rounded-4">Simular</button>
+              <button id="simular-btn" type="button" class="btn btn-primary w-100 rounded-4">Simular</button>
           </form>
         </section>
 
@@ -36,7 +36,7 @@
                   <i class="fa-solid fa-arrow-left"></i>
                 </button>
               </div>
-              <input type="text" class="form-control text-center" id="date-input" 
+              <input type="date" class="form-control text-center" id="date-input" 
               value="07/01/2023" readonly>
               <div class="input-group-append">
                 <button class="btn btn-primary" id="increment-button">

@@ -33,3 +33,13 @@ df = df["atracciones"].apply(lambda diccionario: pd.Series(diccionario).mean())
 
 # Imprimir el DataFrame resultante
 print(df)
+# Filtrar los registros donde el valor de "día" sea igual a 2
+df_sub = df.loc[df.index.get_level_values("día") == 2, ["atracciones"]]
+
+# Extraer las columnas "RR" y "MF" del sub DataFrame
+df_sub = df_sub["atracciones"].apply(pd.Series)
+
+# Imprimir el sub DataFrame resultante
+print(df_sub)
+
+
