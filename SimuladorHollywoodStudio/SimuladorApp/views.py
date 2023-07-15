@@ -10,9 +10,9 @@ def home(request):
     plot_div = createGraph()
     return render (request, 'home.html',{'plot_div': plot_div})
 
-def get_table_data(_request,day):
+def get_table_data(request):
     sim = Simulador()
-    table_data = list(sim.simular(day))
+    table_data = sim.simular()
     if(len(table_data) > 0):
         data = {'message':"Successfully",'table_data':table_data}
     else:

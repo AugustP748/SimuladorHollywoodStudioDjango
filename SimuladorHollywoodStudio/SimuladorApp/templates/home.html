@@ -55,18 +55,6 @@
                   </tr>
                 </thead>
                 <tbody id="tablaBody">
-                  {% for indice,row in table_data.iterrows %}
-                    <tr>
-                        <td>{{indice.1}}:00</td>
-                      {% for data in row %}
-                          <td>{{ data.RR }}</td>
-                          <td>{{ data.MF }}</td>
-                      {% endfor %}
-
-                    </tr>
-                  {% endfor %}
-                  
-                  
                   
                 </tbody>
               </table>

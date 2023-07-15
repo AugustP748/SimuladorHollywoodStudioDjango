@@ -1,3 +1,9 @@
+
+window.addEventListener("load", () => {
+    const dateInput = document.getElementById('date-input');
+    dateInput.value = '2023-07-01';
+});
+
 window.addEventListener("DOMContentLoaded", () => {
     const dateInput = document.getElementById('date-input');
     const decrementButton = document.getElementById('decrement-button');
@@ -31,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let day = String(date.getDate()).padStart(2, '0');
         let month = String(date.getMonth() + 1).padStart(2, '0');
         let year = date.getFullYear();
-        return `${month}/${day}/${year}`;
+        return `${year}/${month}/${day}`;
     }
 
 

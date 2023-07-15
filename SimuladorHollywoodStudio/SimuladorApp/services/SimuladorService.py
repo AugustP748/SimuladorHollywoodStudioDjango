@@ -12,13 +12,12 @@ class Simulador:
         self.teh: float = 0
         self.ted: float = 0
         self.tuple_item: tuple = ()
-        self.atractions:dict = dict()
         self.general_table:list=[]
         self.generate = Generadores()
         self.new_u_value: float = self.generate.congruencial_multiplicativo(1317, 5631, 547)
 
     
-    def simular(self,day):
+    def simular(self):
         # for de dias
         for d in range(30):
             #for de horas
@@ -42,10 +41,9 @@ class Simulador:
                         u = next(self.new_u_value)
                         teminmf=-85*math.log10(u) #TE en minutos en atraccion MF
                         self.tevmf+=teminmf #TE total de visitantes en atracción MF
-                self.atractions["RR"] = float("{:.2f}".format(self.tevrr/self.vrr))
-                self.atractions["MF"] = float("{:.2f}".format(self.tevmf/self.vmf))
                 
-                self.tuple_item+=(copy.copy(self.atractions),)
+                self.tuple_item+=(float("{:.2f}".format(self.tevrr/self.vrr)),)
+                self.tuple_item+=(float("{:.2f}".format(self.tevmf/self.vmf)),)
                 #print(teh/cvh) # promedio tiempo de espera de la hora
                 self.vrr=0
                 self.vmf=0
@@ -53,15 +51,12 @@ class Simulador:
                 self.tevrr=0
                 self.general_table.append(copy.copy(self.tuple_item))
                 self.tuple_item=()
-                self.atractions.clear()
+
                 
         #print(tem/cvd) # promedio tiempo de espera mensual   
         
         df = pd.DataFrame(self.general_table)
-        #df = pd.DataFrame(self.general_table, columns=['atracciones'])
-        df = df.rename(columns={0: "día", 1: "hora", 2: "visitantes", 3: "atracciones"})
-        df = df.set_index(["día", "hora", "visitantes"])
-        #print(df.loc[df.index.get_level_values("día") == 30])
-        return df.loc[df.index.get_level_values("día") == day]
-    
+        df = df.rename(columns={0: "dia", 1: "hora", 2: "visitantes", 3:"RR", 4:"MF"})
+        return df.loc[df["dia"] == 1].to_dict(orient="records")
+        
         
