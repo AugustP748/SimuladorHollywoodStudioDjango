@@ -5,6 +5,7 @@ import math
 
 class Simulador:
     def __init__(self):
+        self.df = pd.DataFrame()
         self.vrr: int = 0
         self.tevrr: float = 0
         self.vmf: int = 0
@@ -55,8 +56,14 @@ class Simulador:
                 
         #print(tem/cvd) # promedio tiempo de espera mensual   
         
-        df = pd.DataFrame(self.general_table)
-        df = df.rename(columns={0: "dia", 1: "hora", 2: "visitantes", 3:"RR", 4:"MF"})
-        return df.loc[df["dia"] == 1].to_dict(orient="records")
+        self.df = pd.DataFrame(self.general_table)
+        self.df = self.df.rename(columns={0: "dia", 1: "hora", 2: "visitantes", 3:"RR", 4:"MF"})
+        return self.df.loc[self.df["dia"] == 1].to_dict(orient="records")
         
-        
+    
+    def get_media_atractions(self):
+        # Calcular la media de la columna "RR"
+        media_rr = self.df["RR"].mean()
+        # Calcular la media de la columna "MF"
+        media_mf = self.df["MF"].mean()
+        return (media_rr, media_mf)

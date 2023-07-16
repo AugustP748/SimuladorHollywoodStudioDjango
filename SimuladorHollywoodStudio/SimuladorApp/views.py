@@ -13,9 +13,13 @@ def home(request):
 def get_table_data(request):
     sim = Simulador()
     table_data = sim.simular()
-    if(len(table_data) > 0):
-        data = {'message':"Successfully",'table_data':table_data}
+    if len(table_data) > 0:
+        data = {'message':"Simulación Completada",'table_data':table_data}
     else:
         data = {'message':"Not Found"}
         
     return JsonResponse(data,safe=False)
+
+def get_media_atractions(request,sim):
+    media_atractions=sim.get_media_atractions()
+    return JsonResponse(media_atractions,safe=False)

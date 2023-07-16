@@ -11,7 +11,7 @@ function actualizarTabla(data) {
     const tr = document.createElement("tr");
 
     const tdhora = document.createElement("td");
-    let txthora = document.createTextNode(row.hora);
+    let txthora = document.createTextNode(row.hora.toString().padStart(2, '0') + ':00');
     tdhora.appendChild(txthora);
     txthora.className = "hora";
     
@@ -31,6 +31,7 @@ function actualizarTabla(data) {
 
     
     tablaBody.appendChild(tr);
+
 
   });
 }
